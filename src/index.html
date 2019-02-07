@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>dont-touch-white-cube</title>
+  <link rel="stylesheet" href="./dist/styles/basic.css">
+  <script>
+    (function (doc, win) {
+      var docEl = doc.documentElement
+      var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+
+      function recalc() {
+        var designWidth = 750
+        var clientWidth = docEl.clientWidth
+        if (!clientWidth || clientWidth > designWidth) return
+        docEl.style.fontSize = (100 * clientWidth / designWidth) + 'px'
+      }
+
+      if (!doc.addEventListener) return
+      win.addEventListener(resizeEvt, recalc, false)
+      doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window)
+  </script>
+</head>
+
+<body>
+@@include('./components/modal.html')
+
+<div class="score-container">1000</div>
+<div class="container"></div>
+<div class="toggle-btn"></div>
+</body>
+<script src="./dist/scripts/index.js"></script>
+<script>
+
+  let d = new dtwc('.container')
+
+  d.start()
+
+  const body = document.body
+  const btn = document.querySelector('.toggle-btn')
+
+  btn.addEventListener('click', function () {
+    if (d.status == 0) {
+      d.start()
+    } else {
+      d.pause()
+    }
+  })
+</script>
+</html>
