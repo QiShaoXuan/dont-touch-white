@@ -40,7 +40,7 @@ class topSpeed {
 
     this.initScore()
 
-    this.container.ontouchstart = function (e) {
+    this.container.onclick = function (e) {
       e.stopPropagation()
 
       if (e.target.classList.contains('cube')) {

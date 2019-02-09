@@ -2,6 +2,14 @@
 
 body {
   position: relative;
+  max-width: 750px;
+  margin:0 auto;
+  background: #fff;
+}
+@media screen and (min-width:750px){
+html{
+  background: #444;
+}
 }
 *{
   -webkit-tap-highlight-color: transparent;
@@ -9,7 +17,7 @@ body {
 .container {
   height:22%;
   width:100%;
-  position:fixed;
+  position:absolute;
   left:0;
   bottom:100%;
 }
