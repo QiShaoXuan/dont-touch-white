@@ -1,97 +1,71 @@
-class dtwc {
-  constructor(container) {
-    this.container = document.querySelector(container)
+function $(selector, all = false) {
+  return all ? document.querySelectorAll(selector) : document.querySelector(selector)
+}
 
-    this.containerHeight = this.container.getClientRects()[0]['height']
-    this.bodyHeight = document.body.getClientRects()[0]['height']
-
-    this.pile = 4
-
-    this.frame = null
-
-    this.step = 1
-
-    this.status = 0 // 0 暂停 ， 1 正在进行
-
-    this.init()
-  }
-
-  init() {
-    this.container.appendChild(this.setRow(1))
-
-    this.container.addEventListener('touchstart', function (e) {
-      e.stopPropagation()
-
-      if (e.target.classList.contains('cube') && e.target.classList.contains('black')) {
-        e.target.classList.add('toWhite')
-      }
-    })
-
-  }
-
-  start() {
-    this.status = 1
-    this.animate()
-  }
-
-  animate() {
-    this.checkToAppend()
-
-    const rows = this.container.querySelectorAll('.row')
-    const that = this
-
-    rows.forEach((row) => {
-      let y = Number(row.dataset['y'])
-      row.style.transform = `translateY(${y + this.step}px)`
-      row.dataset['y'] = y + this.step
-    })
-
-    this.container.lastElementChild
-    this.frame = requestAnimationFrame(function () {
-      that.animate()
-    })
-
-    this.checkToRemove()
-  }
-
-  pause() {
-    this.status = 0
-    cancelAnimationFrame(this.frame)
-  }
-
-  checkToAppend() {
-    const last = this.container.lastElementChild
-    if (Number(last.dataset['y']) + this.step >= this.containerHeight) {
-      this.container.appendChild(this.setRow(1))
-    }
-  }
-
-  checkToRemove() {
-    const first = this.container.firstElementChild
-    if (Number(first.dataset['y']) > (this.bodyHeight + this.containerHeight)) {
-      this.container.removeChild(first)
-    }
-  }
-
-  setRow(line = 1) {
-    const dom = document.createElement('div')
-    let rowStr = ''
-    for (let i = 0; i < line; i++) {
-      rowStr += `<div class="row" data-y="0">${this.setCube(this.getRandom())}</div>`
-    }
-    dom.innerHTML = rowStr
-    return dom.firstChild
-  }
-
-  setCube(random, num = 4) {
-    let cubeStr = ''
-    for (let i = 0; i < num; i++) {
-      cubeStr += `<div class="cube ${i === random ? 'black' : ''}"></div>`
-    }
-    return cubeStr
-  }
-
-  getRandom() {
-    return parseInt(Math.random() * 4, 10)
+function initGame(type) {
+  switch (type){
+    case 'topspeed':
+      $('.score-container.topspeed').style.display = 'block'
+      $('.score-container.classics').style.display = 'none'
+      break
+    case 'classics':
+      $('.score-container.topspeed').style.display = 'none'
+      $('.score-container.classics').style.display = 'block'
+      break
   }
 }
+
+let topspeed = new topSpeed({
+  container: '.container',
+  scoreContainer: '.score-container.topspeed',
+  over: {
+    modal: '#score-modal',
+    score: '#score',
+    historyScore: '#history-score'
+  }
+})
+
+const topSpeedBtn = $('#topspeed-btn')//初始页面极速模式开始
+const disableBtns = $('.modal-btn.disable', true)//开发中按钮
+const closeBtns = $('.modal-close-btn', true)//关闭弹窗按钮
+const backBtns = $('.back-btn', true) //返回首页按钮
+const topspeedResetBtn = $('#topspeed-reset')//极速模式重新开始
+const historyBtn = $('#history-btn')
+
+const initModal = $('#init-modal')//  初始弹窗
+
+disableBtns.forEach((btn) => {
+  btn.addEventListener("click", function () {
+    $('#coding-modal').style.display = 'flex'
+  })
+})
+
+closeBtns.forEach((btn) => {
+  btn.addEventListener('click', function () {
+    $(this.dataset.modal).style.display = 'none'
+  })
+})
+
+topSpeedBtn.addEventListener('click', function () {
+  initGame('topspeed')
+  initModal.style.display = 'none'
+  topspeed.start()
+})
+
+backBtns.forEach((btn) => {
+
+  btn.addEventListener('click', function () {
+    $(this.dataset.modal).style.display = 'none'
+    initModal.style.display = 'flex'
+  })
+})
+topspeedResetBtn.addEventListener('click', function () {
+  $(this.dataset.modal).style.display = 'none'
+  topspeed.start()
+})
+
+historyBtn.addEventListener('click', function () {
+  initModal.style.display = 'none'
+  $('#history-modal').style.display = 'flex'
+  $('#topspeed-score').innerHTML = topspeed.historyScore
+})

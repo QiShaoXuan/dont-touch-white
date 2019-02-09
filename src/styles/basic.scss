@@ -3,6 +3,9 @@
 body {
   position: relative;
 }
+*{
+  -webkit-tap-highlight-color: transparent;
+}
 .container {
   height:22%;
   width:100%;
@@ -27,6 +30,9 @@ body {
 .cube {
   width: 25%;
   height: 100%;
+  cursor: pointer;
+  background: #ffffff;
+  transition: all .3s;
   &:not(:last-of-type){
     border-right:1px solid #333;
   }
@@ -35,11 +41,6 @@ body {
 .cube.black {
   background: #333;
 }
-.cube.toWhite{
-  background: #fffffe;
-  transition: all .3s;
-}
-
 
 .toggle-btn{
   width:100px;
@@ -59,6 +60,15 @@ body {
   font-size: 42px;
   color:#cd4545;
   z-index: 999;
+  display: none;
+  &.classics{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div{
+      margin-right:50px
+    }
+  }
 }
 .modal{
   position: absolute;
@@ -66,21 +76,34 @@ body {
   top:0;
   width:100%;
   height:100%;
-  background: #fff;
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-  display: none;
+  //display: none;
+  &.white-bg{
+    background: #fff;
+  }
+  &.dim-bg{
+    background: rgba(225,225,225,.7);
+  }
   .modal-content{
     width:80%;
     padding:15px;
     border:1px solid #333;
     text-align: center;
     border-radius: 4px;
+    background: #fff;
     .title{
       font-size: 44px;
       margin-bottom:25px;
+    }
+    .content{
+      font-size: 34px;
+      line-height:1.5;
+      &:last-of-type{
+        margin-bottom:15px;
+      }
     }
     .modal-btn{
       width:80%;

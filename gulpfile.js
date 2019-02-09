@@ -61,6 +61,8 @@ gulp.task('babel', () => {
     }))
 })
 
+
+
 gulp.task('serve', ['delete'], function () {
   gulp.start('fileinclude', 'copy', 'sass', 'babel');
   browserSync.init({

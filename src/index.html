@@ -28,26 +28,42 @@
 <body>
 @@include('./components/modal.html')
 
-<div class="score-container">1000</div>
+<div class="score-container topspeed">0</div>
+<div class="score-container classics" style="display: flex">
+<div><span id="remaining-time">60</span>s</div>
+<span id="classics-score">0</span>
+</div>
+
 <div class="container"></div>
-<div class="toggle-btn"></div>
+<!--<div class="toggle-btn"></div>-->
 </body>
+<script src="./dist/scripts/topSpeed.js"></script>
+<script src="./dist/scripts/timeout.js"></script>
+<script src="./dist/scripts/classics.js"></script>
 <script src="./dist/scripts/index.js"></script>
 <script>
 
-  let d = new dtwc('.container')
+  // function timeout(container,second) {
+  //   let sec = second - 1
+  //   console.log(sec)
+  //
+  //   if(sec>0){
+  //     setTimeout(function () {
+  //       timeout(sec)
+  //     },1000)
+  //   }
+  // }
+  //
+  // timeout(null,60)
+  // const body = document.body
+  // const btn = document.querySelector('.toggle-btn')
 
-  d.start()
-
-  const body = document.body
-  const btn = document.querySelector('.toggle-btn')
-
-  btn.addEventListener('click', function () {
-    if (d.status == 0) {
-      d.start()
-    } else {
-      d.pause()
-    }
-  })
+  // btn.addEventListener('click', function () {
+  //   if (topspeed.status == 0) {
+  //     topspeed.start()
+  //   } else {
+  //     topspeed.pause()
+  //   }
+  // })
 </script>
 </html>

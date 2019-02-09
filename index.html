@@ -26,36 +26,78 @@
 </head>
 
 <body>
-<div class="modal">
+<div class="modal white-bg" id="init-modal">
   <div class="modal-content">
     <p class="title">别踩白块</p>
     <div class="modal-btn disable">经典</div>
-    <div class="modal-btn">极速</div>
-    <div class="modal-btn disable">历史记录</div>
+    <div class="modal-btn" id="topspeed-btn">极速</div>
+    <div class="modal-btn" id="history-btn">历史记录</div>
+  </div>
+</div>
+
+<div class="modal dim-bg" id="score-modal" style="display: none;">
+  <div class="modal-content">
+    <p class="title">游戏结束</p>
+    <p class="content">得分：<span id="score"></span></p>
+    <p class="content">历史最高分：<span id="history-score"></span></p>
+    <div class="modal-btn" id="topspeed-reset" data-modal="#score-modal">重新开始</div>
+    <div class="modal-btn back-btn"  data-modal="#score-modal">返回首页</div>
+  </div>
+</div>
+
+<div class="modal white-bg" id="coding-modal" style="display: none;">
+  <div class="modal-content">
+    <p class="title">正在开发 ...</p>
+    <div class="modal-btn modal-close-btn" data-modal="#coding-modal">关闭</div>
+  </div>
+</div>
+
+<div class="modal white-bg" id="history-modal" style="display: none;">
+  <div class="modal-content">
+    <p class="title">历史记录</p>
+    <p class="content">极速模式：<span id="topspeed-score"></span></p>
+    <p class="content">经典模式：<span id="classics-score">--</span></p>
+    <div class="modal-btn back-btn"  data-modal="#history-modal">返回首页</div>
   </div>
 </div>
 
 
-<div class="score-container">1000</div>
+<div class="score-container topspeed">0</div>
+<div class="score-container classics" style="display: flex">
+<div><span id="remaining-time">60</span>s</div>
+<span id="classics-score">0</span>
+</div>
+
 <div class="container"></div>
-<div class="toggle-btn"></div>
+<!--<div class="toggle-btn"></div>-->
 </body>
+<script src="./dist/scripts/topSpeed.js"></script>
+<script src="./dist/scripts/timeout.js"></script>
+<script src="./dist/scripts/classics.js"></script>
 <script src="./dist/scripts/index.js"></script>
 <script>
 
-  let d = new dtwc('.container')
+  // function timeout(container,second) {
+  //   let sec = second - 1
+  //   console.log(sec)
+  //
+  //   if(sec>0){
+  //     setTimeout(function () {
+  //       timeout(sec)
+  //     },1000)
+  //   }
+  // }
+  //
+  // timeout(null,60)
+  // const body = document.body
+  // const btn = document.querySelector('.toggle-btn')
 
-  d.start()
-
-  const body = document.body
-  const btn = document.querySelector('.toggle-btn')
-
-  btn.addEventListener('click', function () {
-    if (d.status == 0) {
-      d.start()
-    } else {
-      d.pause()
-    }
-  })
+  // btn.addEventListener('click', function () {
+  //   if (topspeed.status == 0) {
+  //     topspeed.start()
+  //   } else {
+  //     topspeed.pause()
+  //   }
+  // })
 </script>
 </html>
