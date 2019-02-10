@@ -5,7 +5,8 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>dont-touch-white</title>
-
+  <link rel="icon"
+    href="https://qishaoxuan.github.io/animate_resume_ts/images/favicon.png">
   <script>
     (function (doc, win) {
       var docEl = doc.documentElement
@@ -23,6 +24,7 @@
       if (!doc.addEventListener) return
       win.addEventListener(resizeEvt, recalc, false)
       doc.addEventListener('DOMContentLoaded', recalc, false)
+      recalc()
     })(document, window)
   </script>
   <link rel="stylesheet" href="./dist/styles/basic.css">
@@ -32,9 +34,10 @@
 <div class="modal white-bg" id="init-modal">
   <div class="modal-content">
     <p class="title">别踩白块</p>
-    <div class="modal-btn disable">经典</div>
+    <div class="modal-btn" id="classics-btn">经典</div>
     <div class="modal-btn" id="topspeed-btn">极速</div>
     <div class="modal-btn" id="history-btn">历史记录</div>
+    <a href="https://github.com/QiShaoXuan/dont-touch-white" class="modal-btn">GITHUB --></a>
   </div>
 </div>
 
@@ -58,40 +61,36 @@
 <div class="modal white-bg" id="history-modal" style="display: none;">
   <div class="modal-content">
     <p class="title">历史记录</p>
-    <p class="content">极速模式：<span id="topspeed-score"></span></p>
-    <p class="content">经典模式：<span id="classics-score">--</span></p>
+    <p class="content">极速模式：<span id="history-topspeed-score"></span></p>
+    <p class="content">经典模式：<span id="history-classics-score">--</span></p>
     <div class="modal-btn back-btn"  data-modal="#history-modal">返回首页</div>
   </div>
 </div>
 
-
-<div class="score-container topspeed">0</div>
-<div class="score-container classics" style="display: flex">
-<div><span id="remaining-time">60</span>s</div>
-<span id="classics-score">0</span>
+<div class="topspeed-container hide">
+  <div class="score-container topspeed">0</div>
+  <div class="container topspeed" id="topspeed-container"></div>
 </div>
 
-<div class="container"></div>
+<div class="classics-container">
+  <div class="score-container classics">
+    <div><span id="remaining-time">60</span>s</div>
+    <span id="classics-score">0</span>
+  </div>
+  <div class="container classics" id="classics-container"></div>
+</div>
+
+
 <!--<div class="toggle-btn"></div>-->
 </body>
 <script src="./dist/scripts/topspeed.js"></script>
-<script src="./dist/scripts/timeout.js"></script>
 <script src="./dist/scripts/classics.js"></script>
 <script src="./dist/scripts/index.js"></script>
 <script>
 
-  // function timeout(container,second) {
-  //   let sec = second - 1
-  //   console.log(sec)
-  //
-  //   if(sec>0){
-  //     setTimeout(function () {
-  //       timeout(sec)
-  //     },1000)
-  //   }
-  // }
-  //
-  // timeout(null,60)
+
+  // classics.start()
+
   // const body = document.body
   // const btn = document.querySelector('.toggle-btn')
 

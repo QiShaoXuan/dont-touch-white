@@ -1,4 +1,4 @@
-class topSpeed {
+class Topspeed {
   constructor(options) {
     this.container = document.querySelector(options.container)
     this.scoreContainer = document.querySelector(options.scoreContainer)
@@ -8,6 +8,7 @@ class topSpeed {
     this.historyscoreSpan = document.querySelector(options.over.historyScore)
 
     this.containerHeight = this.container.getClientRects()[0]['height']
+
     this.bodyHeight = document.body.getClientRects()[0]['height']
 
     this.frame = null
@@ -18,7 +19,6 @@ class topSpeed {
 
     this.score = 0
 
-    // this.historyClassicsScore = localStorage.getItem('donttouchwhiteClassics') ? Number(localStorage.getItem('donttouchwhiteClassics')) : 0 // 经典模式历史记录
     this.historyScore = localStorage.getItem('donttouchwhiteTopspeed') ? Number(localStorage.getItem('donttouchwhiteTopspeed')) : 0 // 极速模式历史记录
 
     // 初始正确六个难度增加（速度加快），每次增加 basic 累加 2
@@ -33,12 +33,14 @@ class topSpeed {
     const that = this
 
     this.container.innerHTML = ''
-    this.container.appendChild(this.setRow(1))
+    this.container.appendChild(this.setRow())
 
+    this.step = 3
     this.increaseBasic = 6
     this.lastIncrease = 0
 
-    this.initScore()
+    this.score = 0
+    this.scoreContainer.innerHTML = this.score
 
     this.container.onclick = function (e) {
       e.stopPropagation()
@@ -47,7 +49,7 @@ class topSpeed {
         if (e.target.classList.contains('black')) {
           e.target.classList.remove('black')
           that.updateScore()
-          that.checkIncreaseifficulty()
+          that.checkIncreaseDifficulty()
         } else {
           that.gameover()
         }
@@ -55,19 +57,12 @@ class topSpeed {
     }
   }
 
-
-  initScore() {
-    this.score = 0
-    this.scoreContainer.innerHTML = this.score
-
-  }
-
   updateScore() {
     this.score += 1
     this.scoreContainer.innerHTML = this.score
   }
 
-  checkIncreaseifficulty() {
+  checkIncreaseDifficulty() {
     if (this.score - this.lastIncrease === this.increaseBasic) {
       this.lastIncrease = this.score
 
@@ -135,7 +130,7 @@ class topSpeed {
   checkToAppend() {
     const last = this.container.lastElementChild
     if (Number(last.dataset['y']) + this.step >= this.containerHeight) {
-      this.container.appendChild(this.setRow(1))
+      this.container.appendChild(this.setRow())
     }
   }
 
@@ -146,13 +141,9 @@ class topSpeed {
     }
   }
 
-  setRow(line = 1) {
+  setRow() {
     const dom = document.createElement('div')
-    let rowStr = ''
-    for (let i = 0; i < line; i++) {
-      rowStr += `<div class="row" data-y="0">${this.setCube(this.getRandom())}</div>`
-    }
-    dom.innerHTML = rowStr
+    dom.innerHTML = `<div class="row" data-y="0">${this.setCube(this.getRandom())}</div>`
     return dom.firstChild
   }
 

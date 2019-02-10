@@ -5,7 +5,8 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>dont-touch-white</title>
-
+  <link rel="icon"
+    href="https://qishaoxuan.github.io/animate_resume_ts/images/favicon.png">
   <script>
     (function (doc, win) {
       var docEl = doc.documentElement
@@ -23,6 +24,7 @@
       if (!doc.addEventListener) return
       win.addEventListener(resizeEvt, recalc, false)
       doc.addEventListener('DOMContentLoaded', recalc, false)
+      recalc()
     })(document, window)
   </script>
   <link rel="stylesheet" href="./dist/styles/basic.css">
@@ -30,34 +32,19 @@
 
 <body>
 @@include('./components/modal.html')
+@@include('./components/topspeed.html')
+@@include('./components/classics.html')
 
-<div class="score-container topspeed">0</div>
-<div class="score-container classics" style="display: flex">
-<div><span id="remaining-time">60</span>s</div>
-<span id="classics-score">0</span>
-</div>
-
-<div class="container"></div>
 <!--<div class="toggle-btn"></div>-->
 </body>
 <script src="./dist/scripts/topspeed.js"></script>
-<script src="./dist/scripts/timeout.js"></script>
 <script src="./dist/scripts/classics.js"></script>
 <script src="./dist/scripts/index.js"></script>
 <script>
 
-  // function timeout(container,second) {
-  //   let sec = second - 1
-  //   console.log(sec)
-  //
-  //   if(sec>0){
-  //     setTimeout(function () {
-  //       timeout(sec)
-  //     },1000)
-  //   }
-  // }
-  //
-  // timeout(null,60)
+
+  // classics.start()
+
   // const body = document.body
   // const btn = document.querySelector('.toggle-btn')
 

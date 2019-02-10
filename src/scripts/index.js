@@ -1,22 +1,23 @@
 function $(selector, all = false) {
   return all ? document.querySelectorAll(selector) : document.querySelector(selector)
 }
-
+let gameType = ''
 function initGame(type) {
+  gameType = type
   switch (type){
     case 'topspeed':
-      $('.score-container.topspeed').style.display = 'block'
-      $('.score-container.classics').style.display = 'none'
+      $('.topspeed-container').classList.remove('hide')
+      $('.classics-container').classList.add('hide')
       break
     case 'classics':
-      $('.score-container.topspeed').style.display = 'none'
-      $('.score-container.classics').style.display = 'block'
+      $('.topspeed-container').classList.add('hide')
+      $('.classics-container').classList.remove('hide')
       break
   }
 }
 
-let topspeed = new topSpeed({
-  container: '.container',
+const topspeed = new Topspeed({
+  container: '#topspeed-container',
   scoreContainer: '.score-container.topspeed',
   over: {
     modal: '#score-modal',
@@ -25,11 +26,23 @@ let topspeed = new topSpeed({
   }
 })
 
+const classics = new Classics({
+  container: '#classics-container',
+  timeContainer:'#remaining-time',
+  scoreContainer: '#classics-score',
+  over: {
+    modal: '#score-modal',
+    score: '#score',
+    historyScore: '#history-score'
+  }
+})
+
 const topSpeedBtn = $('#topspeed-btn')//初始页面极速模式开始
+const classicsBtn = $('#classics-btn')//初始页面极速模式开始
 const disableBtns = $('.modal-btn.disable', true)//开发中按钮
 const closeBtns = $('.modal-close-btn', true)//关闭弹窗按钮
 const backBtns = $('.back-btn', true) //返回首页按钮
-const topspeedResetBtn = $('#topspeed-reset')//极速模式重新开始
+const resetBtn = $('#topspeed-reset')//极速模式重新开始
 const historyBtn = $('#history-btn')
 
 const initModal = $('#init-modal')//  初始弹窗
@@ -52,20 +65,32 @@ topSpeedBtn.addEventListener('click', function () {
   topspeed.start()
 })
 
-backBtns.forEach((btn) => {
+classicsBtn.addEventListener('click', function () {
+  initGame('classics')
+  initModal.style.display = 'none'
+  classics.start()
+})
 
+backBtns.forEach((btn) => {
   btn.addEventListener('click', function () {
     $(this.dataset.modal).style.display = 'none'
     initModal.style.display = 'flex'
   })
 })
-topspeedResetBtn.addEventListener('click', function () {
+
+resetBtn.addEventListener('click', function () {
   $(this.dataset.modal).style.display = 'none'
-  topspeed.start()
+  if(gameType === 'topspeed'){
+    topspeed.start()
+  }else{
+    classics.start()
+  }
 })
 
 historyBtn.addEventListener('click', function () {
   initModal.style.display = 'none'
   $('#history-modal').style.display = 'flex'
-  $('#topspeed-score').innerHTML = topspeed.historyScore
+  $('#history-topspeed-score').innerHTML = topspeed.historyScore
+  $('#history-classics-score').innerHTML = classics.historyScore
 })
+

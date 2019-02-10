@@ -3,36 +3,77 @@
 body {
   position: relative;
   max-width: 750px;
-  margin:0 auto;
+  margin: 0 auto;
   background: #fff;
 }
-@media screen and (min-width:750px){
-html{
-  background: #444;
-}
-}
-*{
-  -webkit-tap-highlight-color: transparent;
-}
-.container {
-  height:22%;
-  width:100%;
-  position:absolute;
-  left:0;
-  bottom:100%;
+
+@media screen and (min-width: 750px) {
+  html {
+    background: #444;
+  }
 }
 
-.row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border-bottom: 1px solid #333;
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+.topspeed-container.hide {
+  visibility: hidden;
+}
+.container.topspeed {
+  height: 23%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  &.hide {
+    visibility: hidden;
+  }
+  .row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom: 1px solid #333;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+}
+.classics-container.hide {
+  visibility: hidden;
+}
+.container.classics {
   height: 100%;
-  width:100%;
-  position:absolute;
-  left:0;
-  top:0;
-  z-index: 1;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  .row {
+    height: 23%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom: 1px solid #333;
+    height: 23%;
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: all .1s;
+    &:nth-of-type(2){
+      border-bottom:none;
+    }
+  }
+  @for $i from 1 through 7 {
+    .row:nth-of-type(#{$i}) {
+      transform: translateY(-100% * ($i - 2));
+    }
+  }
 }
 
 .cube {
@@ -41,8 +82,8 @@ html{
   cursor: pointer;
   background: #ffffff;
   transition: all .3s;
-  &:not(:last-of-type){
-    border-right:1px solid #333;
+  &:not(:last-of-type) {
+    border-right: 1px solid #333;
   }
 }
 
@@ -50,79 +91,84 @@ html{
   background: #333;
 }
 
-.toggle-btn{
-  width:100px;
-  height:100px;
-  border-radius:100%;
+.toggle-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
   background: red;
   position: fixed;
-  right:20px;
-  bottom:20px;
+  right: 20px;
+  bottom: 20px;
 }
-.score-container{
+
+.score-container {
   position: absolute;
-  top:15px;
-  left:0;
-  width:100%;
+  top: 15px;
+  left: 0;
+  width: 100%;
   text-align: center;
   font-size: 42px;
-  color:#cd4545;
+  color: #cd4545;
   z-index: 999;
-  display: none;
-  &.classics{
+  &.classics {
     display: flex;
     justify-content: center;
     align-items: center;
-    div{
-      margin-right:50px
+    div {
+      margin-right: 50px
     }
   }
 }
-.modal{
+
+.modal {
   position: absolute;
-  left:0;
-  top:0;
-  width:100%;
-  height:100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
   //display: none;
-  &.white-bg{
+  &.white-bg {
     background: #fff;
   }
-  &.dim-bg{
-    background: rgba(225,225,225,.7);
+  &.dim-bg {
+    background: rgba(225, 225, 225, .7);
   }
-  .modal-content{
-    width:80%;
-    padding:15px;
-    border:1px solid #333;
+  a{
+    color:#00adb5;
+    display: block;
+  }
+  .modal-content {
+    width: 80%;
+    padding: 15px;
+    border: 1px solid #333;
     text-align: center;
     border-radius: 4px;
     background: #fff;
-    .title{
+    .title {
       font-size: 44px;
-      margin-bottom:25px;
+      margin-bottom: 25px;
     }
-    .content{
+    .content {
       font-size: 34px;
-      line-height:1.5;
-      &:last-of-type{
-        margin-bottom:15px;
+      line-height: 1.5;
+      &:last-of-type {
+        margin-bottom: 15px;
       }
     }
-    .modal-btn{
-      width:80%;
-      padding:10px;
-      margin:0 auto 15px;
+    .modal-btn {
+      width: 80%;
+      padding: 10px;
+      margin: 0 auto 15px;
       font-size: 32px;
-      border:1px solid #333;
+      border: 1px solid #333;
       cursor: pointer;
-      &.disable{
+      &.disable {
         background: #ddd;
-        border-color:#999;
+        border-color: #999;
       }
     }
   }
