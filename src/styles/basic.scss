@@ -1,5 +1,5 @@
 @import "asset/reset";
-
+$height:24%;
 body {
   position: relative;
   max-width: 750px;
@@ -28,7 +28,7 @@ body {
   z-index: -1;
 }
 .container.topspeed {
-  height: 23%;
+  height: $height;
   width: 100%;
   position: absolute;
   left: 0;
@@ -61,12 +61,11 @@ body {
   bottom: 0;
   z-index: 2;
   .row {
-    height: 23%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     border-bottom: 1px solid #333;
-    height: 23%;
+    height: $height;
     width: 100%;
     z-index: 1;
     position: absolute;
@@ -93,10 +92,12 @@ body {
   &:not(:last-of-type) {
     border-right: 1px solid #333;
   }
-}
-
-.cube.black {
-  background: #333;
+  &.black {
+    background: #333;
+  }
+  &.toGray{
+    background: #ddd;
+  }
 }
 
 .toggle-btn {
@@ -107,6 +108,7 @@ body {
   position: fixed;
   right: 20px;
   bottom: 20px;
+  z-index: 100000;
 }
 
 .score-container {
@@ -115,16 +117,17 @@ body {
   left: 0;
   width: 100%;
   text-align: center;
-  font-size: 42px;
+  font-size: 54px;
   color: #cd4545;
   z-index: 999;
+  //font-weight: bold;
   &.classics {
     display: flex;
     justify-content: center;
     align-items: center;
-    div {
-      margin-right: 50px
-    }
+    //div {
+    //  margin-right: 50px
+    //}
   }
 }
 
@@ -148,6 +151,24 @@ body {
   a{
     color:#00adb5;
     display: block;
+  }
+  .init-modal-content{
+    height:100%;
+    width:100%;
+    padding:60px 0 ;
+    text-align: center;
+    line-height:230px;
+    .title{
+      font-size: 64px;
+    }
+    .modal-btn{
+      font-size: 54px;
+      height: 230px;
+      &:nth-child(odd){
+        background: #333;
+        color:#fff;
+      }
+    }
   }
   .modal-content {
     width: 80%;

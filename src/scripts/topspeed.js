@@ -13,7 +13,7 @@ class Topspeed {
 
     this.frame = null
 
-    this.step = 3
+    this.step = 4
 
     this.status = 0 // 0 暂停 ， 1 正在进行
 
@@ -25,8 +25,6 @@ class Topspeed {
     // increaseBasic 用于记录上次累加
     this.increaseBasic = 6
     this.lastIncrease = 0
-
-    // this.init()
   }
 
   init() {
@@ -47,16 +45,22 @@ class Topspeed {
 
       if (e.target.classList.contains('cube')) {
         if (e.target.classList.contains('black')) {
-          e.target.classList.remove('black')
-          that.updateScore()
-          that.checkIncreaseDifficulty()
-        } else {
+          if(that.isFirstLine(e.target.parentNode)){
+            e.target.classList.remove('black')
+            e.target.classList.add('toGray')
+            that.updateScore()
+            that.checkIncreaseDifficulty()
+          }
+
+        } else if (!e.target.classList.contains('toGray')) {
           that.gameover()
         }
       }
     }
   }
-
+  isFirstLine(row){
+    return row.previousElementSibling?row.previousElementSibling.querySelector('.cube.black')===null:true
+  }
   updateScore() {
     this.score += 1
     this.scoreContainer.innerHTML = this.score
@@ -91,7 +95,6 @@ class Topspeed {
       row.dataset['y'] = y + this.step
     })
 
-    this.container.lastElementChild
     this.frame = requestAnimationFrame(function () {
       that.animateTopspeed()
     })
@@ -111,17 +114,19 @@ class Topspeed {
     this.pause()
     this.overModal.style.display = 'flex'
 
-    if(this.score > this.historyScore){
+    if (this.score > this.historyScore) {
       this.updateHistoryScore(this.score)
       this.historyScore = this.score
     }
 
-    this.scoreSpan.innerHTML =  this.score
+    this.scoreSpan.innerHTML = this.score
     this.historyscoreSpan.innerHTML = this.historyScore
   }
-  updateHistoryScore(score){
-    localStorage.setItem('donttouchwhiteTopspeed',score)
+
+  updateHistoryScore(score) {
+    localStorage.setItem('donttouchwhiteTopspeed', score)
   }
+
   pause() {
     this.status = 0
     cancelAnimationFrame(this.frame)

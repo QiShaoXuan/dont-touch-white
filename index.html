@@ -27,15 +27,16 @@
       recalc()
     })(document, window)
   </script>
-  <link rel="stylesheet" href="./dist/styles/basic.css?v=201902101544">
+  <link rel="stylesheet" href="./dist/styles/basic.css?v=201902102023">
 </head>
 
 <body>
 <div class="modal white-bg" id="init-modal">
-  <div class="modal-content">
-    <p class="title">别踩白块</p>
+  <div class="init-modal-content">
+    <!--<p class="title">别踩白块</p>-->
     <div class="modal-btn" id="classics-btn">经典</div>
     <div class="modal-btn" id="topspeed-btn">极速</div>
+    <div class="modal-btn disable" id="arcade-btn">街机</div>
     <div class="modal-btn" id="history-btn">历史记录</div>
     <a href="https://github.com/QiShaoXuan/dont-touch-white" class="modal-btn">GITHUB --></a>
   </div>
@@ -51,14 +52,14 @@
   </div>
 </div>
 
-<div class="modal white-bg" id="coding-modal" style="display: none;">
+<div class="modal dim-bg" id="coding-modal" style="display: none;">
   <div class="modal-content">
     <p class="title">正在开发 ...</p>
     <div class="modal-btn modal-close-btn" data-modal="#coding-modal">关闭</div>
   </div>
 </div>
 
-<div class="modal white-bg" id="history-modal" style="display: none;">
+<div class="modal dim-bg" id="history-modal" style="display: none;">
   <div class="modal-content">
     <p class="title">历史记录</p>
     <p class="content">极速模式：<span id="history-topspeed-score"></span></p>
@@ -74,8 +75,8 @@
 
 <div class="classics-container">
   <div class="score-container classics">
-    <div><span id="remaining-time">60</span>s</div>
-    <span id="classics-score">0</span>
+    <div><span id="remaining-time">60</span>''</div>
+    <!--<span id="classics-score">0</span>-->
   </div>
   <div class="container classics" id="classics-container"></div>
 </div>
@@ -83,17 +84,12 @@
 
 <!--<div class="toggle-btn"></div>-->
 </body>
-<script src="./dist/scripts/topspeed.js?v=201902101524"></script>
-<script src="./dist/scripts/classics.js?v=201902101524"></script>
-<script src="./dist/scripts/index.js?v=201902101524"></script>
+<script src="./dist/scripts/topspeed.js?v=201902102023"></script>
+<script src="./dist/scripts/classics.js?v=201902102023"></script>
+<script src="./dist/scripts/index.js?v=201902102023"></script>
 <script>
-
-
-  // classics.start()
-
-  // const body = document.body
   // const btn = document.querySelector('.toggle-btn')
-
+  //
   // btn.addEventListener('click', function () {
   //   if (topspeed.status == 0) {
   //     topspeed.start()

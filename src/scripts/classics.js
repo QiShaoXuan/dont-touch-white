@@ -17,7 +17,7 @@ class Classics {
 
     this.score = 0
 
-    this.second = 60
+    this.second = 30
 
     this.historyScore = localStorage.getItem('donttouchwhiteClassics') ? Number(localStorage.getItem('donttouchwhiteClassics')) : 0 // 经典模式历史记录
 
@@ -28,7 +28,7 @@ class Classics {
     this.score = 0
 
     this.container.innerHTML = ''
-    this.scoreContainer.innerHTML = this.score
+    // this.scoreContainer.innerHTML = this.score
     this.timeContainer.innerText =  this.second
 
     this.container.onclick = function (e) {
@@ -39,7 +39,8 @@ class Classics {
         if (e.target.classList.contains('black') && index === 5) {
           that.updateScore()
           that.animate()
-        } else {
+        }
+        if(!e.target.classList.contains('black')){
           that.gameover()
         }
       }
@@ -48,11 +49,11 @@ class Classics {
 
   updateScore() {
     this.score += 1
-    this.scoreContainer.innerHTML = this.score
+    // this.scoreContainer.innerHTML = this.score
   }
 
   timeout(container, second) {
-    let sec = second - 1
+    let sec = (second - 0.1).toFixed(1)
 
     if (this.status === 0) return
 
@@ -60,7 +61,7 @@ class Classics {
       setTimeout(() => {
         container.innerText = sec
         this.timeout(container, sec)
-      }, 1000)
+      }, 100)
     } else {
       this.gameover()
     }

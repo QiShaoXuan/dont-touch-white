@@ -1,4 +1,4 @@
-# 别猜白块
+# 别踩白块 don`t touch white
 
 春节无聊写的
 

@@ -88,7 +88,7 @@ resetBtn.addEventListener('click', function () {
 })
 
 historyBtn.addEventListener('click', function () {
-  initModal.style.display = 'none'
+  // initModal.style.display = 'none'
   $('#history-modal').style.display = 'flex'
   $('#history-topspeed-score').innerHTML = topspeed.historyScore
   $('#history-classics-score').innerHTML = classics.historyScore
