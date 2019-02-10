@@ -80,15 +80,17 @@ backBtns.forEach((btn) => {
 
 resetBtn.addEventListener('click', function () {
   $(this.dataset.modal).style.display = 'none'
-  if(gameType === 'topspeed'){
-    topspeed.start()
-  }else{
-    classics.start()
+  switch (gameType) {
+    case 'topspeed':
+      topspeed.start()
+      break
+    case 'classics':
+      classics.start()
+      break
   }
 })
 
 historyBtn.addEventListener('click', function () {
-  // initModal.style.display = 'none'
   $('#history-modal').style.display = 'flex'
   $('#history-topspeed-score').innerHTML = topspeed.historyScore
   $('#history-classics-score').innerHTML = classics.historyScore

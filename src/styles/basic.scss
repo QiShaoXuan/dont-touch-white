@@ -120,14 +120,11 @@ body {
   font-size: 54px;
   color: #cd4545;
   z-index: 999;
-  //font-weight: bold;
+  font-weight: bold;
   &.classics {
     display: flex;
     justify-content: center;
     align-items: center;
-    //div {
-    //  margin-right: 50px
-    //}
   }
 }
 
