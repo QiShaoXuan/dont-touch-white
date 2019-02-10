@@ -1,10 +1,12 @@
 function $(selector, all = false) {
   return all ? document.querySelectorAll(selector) : document.querySelector(selector)
 }
+
 let gameType = ''
+
 function initGame(type) {
   gameType = type
-  switch (type){
+  switch (type) {
     case 'topspeed':
       $('.topspeed-container').classList.remove('hide')
       $('.classics-container').classList.add('hide')
@@ -28,7 +30,7 @@ const topspeed = new Topspeed({
 
 const classics = new Classics({
   container: '#classics-container',
-  timeContainer:'#remaining-time',
+  timeContainer: '#remaining-time',
   scoreContainer: '#classics-score',
   over: {
     modal: '#score-modal',
