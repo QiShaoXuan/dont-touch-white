@@ -17,6 +17,8 @@ class Classics {
 
     this.score = 0
 
+    this.second = 60
+
     this.historyScore = localStorage.getItem('donttouchwhiteClassics') ? Number(localStorage.getItem('donttouchwhiteClassics')) : 0 // 经典模式历史记录
 
   }
@@ -27,6 +29,7 @@ class Classics {
 
     this.container.innerHTML = ''
     this.scoreContainer.innerHTML = this.score
+    this.timeContainer.innerText =  this.second
 
     this.container.onclick = function (e) {
       e.stopPropagation()
@@ -95,7 +98,7 @@ class Classics {
     }
 
 
-    this.timeout(this.timeContainer, 60)
+    this.timeout(this.timeContainer, this.second)
   }
 
   setRow() {
